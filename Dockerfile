@@ -21,7 +21,7 @@ RUN mkdir -p /ComfyUI/models/checkpoints && \
 
 # Copy files
 COPY handler.py /handler.py
-COPY illustrious_api.json /illustrious_api.json
+COPY model.json /model.json
 COPY extra_model_paths.yaml /ComfyUI/extra_model_paths.yaml
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

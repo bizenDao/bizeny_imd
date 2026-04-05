@@ -140,7 +140,7 @@ def handler(job):
 
         logger.info(f"Parameters: {width}x{height}, steps={steps}, seed={seed}, cfg={cfg}")
 
-        with open("/illustrious_api.json", "r") as f:
+        with open("/model.json", "r") as f:
             workflow = json.load(f)
 
         workflow["3"]["inputs"]["text"] = prompt

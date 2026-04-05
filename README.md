@@ -1,10 +1,10 @@
 # generate_pict
 
-Illustrious XL v2.0 (WAI-ANI) によるアニメ/イラスト画像生成API（RunPod Serverless）
+Illustrious XL v2.0 によるアニメ/イラスト画像生成API（RunPod Serverless）
 
 ## 概要
 
-テキストプロンプトからアニメ・イラスト画像を生成するAPI。ComfyUIバックエンドでWAI-ANI-Illustrious-v2.0モデルを使用し、RunPod Serverless上で動作する。
+テキストプロンプトからアニメ・イラスト画像を生成するAPI。ComfyUIバックエンドでIllustrious XL v2.0モデルを使用し、RunPod Serverless上で動作する。
 
 ## 機能
 
@@ -12,7 +12,6 @@ Illustrious XL v2.0 (WAI-ANI) によるアニメ/イラスト画像生成API（R
 - Danbooruタグ + 自然言語対応
 - 自動品質タグ付与（masterpiece, best quality, absurdres）
 - JPEG出力（品質指定可能）
-- 軽量モデル（6.5GB）で高速生成
 
 ## API パラメータ
 
@@ -28,23 +27,19 @@ Illustrious XL v2.0 (WAI-ANI) によるアニメ/イラスト画像生成API（R
 | `quality` | int | 90 | JPEG品質 (1-100) |
 | `no_quality_tags` | bool | false | 品質タグ自動付与を無効化 |
 
-## 使用例
+## ビルド
 
-```json
-{
-  "input": {
-    "prompt": "1girl, long hair, blue eyes, school uniform, standing, outdoors"
-  }
-}
+```bash
+docker build -t generate-pict .
 ```
 
 ## 構成
 
 | コンポーネント | 詳細 |
 |--------------|------|
-| 生成モデル | WAI-ANI-Illustrious v2.0 (SDXL, 6.5GB) |
+| 生成モデル | Illustrious XL v2.0 (SDXL, ~6.9GB, public/ungated) |
 | CLIP Skip | 2 |
-| サンプラー | Euler Ancestral |
+| サンプラー | Euler Ancestral (Normal) |
 | バックエンド | ComfyUI |
 | GPU | NVIDIA 8GB+ |
 | 出力形式 | JPEG (Base64) |
