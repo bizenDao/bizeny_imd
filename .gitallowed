@@ -9,3 +9,5 @@ echo "ERROR: RUNPOD_API_KEY and RUNPOD_ENDPOINT_ID must be set"
 -H "Authorization: Bearer ${RUNPOD_API_KEY}")
 RUNPOD_API_KEY=your-actual-api-key
 Authorization: Bearer {RUNPOD_API_KEY}
+HF_TOKEN=$(cat /run/secrets/hf_token) && \
+wget -q "https://civitai.com/api/download/models/${MODEL_ID}?token=${CIVITAI_API_TOKEN}" \
