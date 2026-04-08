@@ -2,15 +2,15 @@
 
 [日本語](../README.md)
 
-Anime/illustration image generation API using Illustrious XL v2.0 on RunPod Serverless.
+3DCG/anime image generation API using Nova 3DCG XL Illustrious v3.0 on RunPod Serverless.
 
 ## Overview
 
-Generate high-quality anime and illustration images from text prompts. Uses the Illustrious XL v2.0 model (SDXL-based) on a ComfyUI backend, deployed on RunPod Serverless.
+Generate high-quality 3DCG-style anime and illustration images from text prompts. Uses the Nova 3DCG XL Illustrious v3.0 model (SDXL-based) on a ComfyUI backend, deployed on RunPod Serverless.
 
 ## Features
 
-- Text-to-image anime/illustration generation
+- Text-to-image 3DCG/anime generation
 - Danbooru tag + natural language support
 - Automatic quality tags (masterpiece, best quality, absurdres)
 - Multiple LoRA stacking (up to 10) via URL
@@ -24,9 +24,9 @@ Generate high-quality anime and illustration images from text prompts. Uses the 
 | `negative_prompt` | string | (auto) | Negative prompt (sensible default provided) |
 | `width` | int | 1024 | Image width (auto-rounded to nearest 8) |
 | `height` | int | 1024 | Image height (auto-rounded to nearest 8) |
-| `steps` | int | 28 | Inference steps |
+| `steps` | int | 25 | Inference steps |
 | `seed` | int | 42 | Random seed |
-| `cfg` | float | 6.0 | CFG scale |
+| `cfg` | float | 4.0 | CFG scale |
 | `quality` | int | 90 | JPEG quality (1-100) |
 | `no_quality_tags` | bool | false | Disable automatic quality tag appending |
 | `loras` | array | (none) | Array of LoRA objects `{url, strength}` (max 10) |
@@ -87,7 +87,7 @@ curl -s -X POST "https://api.runpod.ai/v2/${ENDPOINT_ID}/runsync" \
 
 | Component | Details |
 |-----------|---------|
-| Model | Illustrious XL v2.0 (SDXL, ~6.9GB, public/ungated) |
+| Model | Nova 3DCG XL Illustrious v3.0 (SDXL, ~6.5GB, public) |
 | CLIP Skip | 2 |
 | Sampler | Euler Ancestral (Normal) |
 | Backend | ComfyUI |

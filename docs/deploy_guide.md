@@ -9,7 +9,7 @@
 ## 1. Docker イメージのビルド
 
 ```bash
-cd /Users/goodsun/develop/bizeny/generate_pict
+cd /path/to/bizeny_imd
 
 # ビルド（モデルダウンロードを含むため10〜20分程度）
 docker build -t bizenyakiko/generate-pict:latest .
@@ -17,10 +17,10 @@ docker build -t bizenyakiko/generate-pict:latest .
 
 ### ビルド時の注意
 
-- Illustrious XL v2.0: 約6.9GB
+- Nova 3DCG XL Illustrious v3.0: 約6.5GB
 - ComfyUI + 依存パッケージ: 約2GB
-- **合計: 約9GBのダウンロード**
-- すべてのモデルは **public/ungated**（認証不要）
+- **合計: 約8.5GBのダウンロード**
+- チェックポイントは **public**（認証不要）
 
 ## 2. DockerHub へプッシュ
 
@@ -99,6 +99,16 @@ curl -s -X POST \
   -d '{"input":{"prompt":"1girl, sitting, cafe, warm lighting, detailed"}}' | jq .
 ```
 
+### LoRAテスト
+
+```bash
+curl -s -X POST \
+  "https://api.runpod.ai/v2/${RUNPOD_ENDPOINT_ID}/runsync" \
+  -H "Authorization: Bearer ${RUNPOD_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{"input":{"prompt":"1girl, portrait, detailed face","lora_url":"https://example.com/your_lora.safetensors","lora_strength":0.8}}' | jq .
+```
+
 ## 6. トラブルシューティング
 
 ### ビルドが失敗する
@@ -106,7 +116,7 @@ curl -s -X POST \
 | エラー | 原因 | 対処 |
 |--------|------|------|
 | Disk space | ディスク不足 | `docker system prune` で空き確保 |
-| Network timeout | ダウンロード失敗 | 再実行（約9GBのダウンロード） |
+| Network timeout | ダウンロード失敗 | 再実行（約8.5GBのダウンロード） |
 
 ### ジョブが FAILED になる
 
@@ -116,6 +126,7 @@ curl -s -X POST \
 | No images generated | ワークフロー実行失敗 | プロンプトやパラメータを確認 |
 | OOM (Out of Memory) | VRAM不足 | 解像度を下げる (768x768)、8GB以上のGPU推奨 |
 | ComfyUI execution error | ノード実行エラー | ComfyUIのバージョン互換性を確認 |
+| Failed to download LoRA | LoRA DL失敗 | URLの有効性・アクセス権を確認 |
 
 ### コールドスタートが遅い
 

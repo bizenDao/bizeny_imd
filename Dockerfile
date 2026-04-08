@@ -14,10 +14,10 @@ RUN cd /ComfyUI/custom_nodes && \
 # Install handler dependencies
 RUN pip install runpod websocket-client Pillow
 
-# Download Illustrious XL v2.0 (~6.9GB, public, ungated)
+# Download Nova 3DCG XL Illustrious v3.0 (~6.5GB, public)
 RUN mkdir -p /ComfyUI/models/checkpoints && \
-    wget -q https://huggingface.co/OnomaAIResearch/Illustrious-XL-v2.0/resolve/main/Illustrious-XL-v2.0.safetensors \
-    -O /ComfyUI/models/checkpoints/Illustrious-XL-v2.0.safetensors
+    wget -q https://huggingface.co/datasets/John6666/model-mirror-26/resolve/main/nova3DCGXL_illustriousV30.safetensors \
+    -O /ComfyUI/models/checkpoints/nova3DCGXL_illustriousV30.safetensors
 
 # Copy files
 COPY handler.py /handler.py
