@@ -14,10 +14,8 @@ RUN cd /ComfyUI/custom_nodes && \
 # Install handler dependencies
 RUN pip install runpod websocket-client Pillow
 
-# Download Pony Diffusion V6 XL (~6.5GB, public)
-RUN mkdir -p /ComfyUI/models/checkpoints && \
-    wget -q https://huggingface.co/AstraliteHeart/pony-diffusion-v6/resolve/main/v6.safetensors \
-    -O /ComfyUI/models/checkpoints/ponyDiffusionV6XL.safetensors
+# Checkpoint directory (model is downloaded at container startup)
+RUN mkdir -p /ComfyUI/models/checkpoints
 
 # Copy files
 COPY handler.py /handler.py

@@ -1,6 +1,21 @@
 #!/bin/bash
 set -e
 
+# Download checkpoint if not already present
+CKPT_PATH="/ComfyUI/models/checkpoints/UnholyDesireMixSinisterAesthetic_V8.safetensors"
+if [ ! -f "$CKPT_PATH" ]; then
+    if [ -z "$CIVITAI_API_TOKEN" ]; then
+        echo "ERROR: CIVITAI_API_TOKEN is required to download the model"
+        exit 1
+    fi
+    echo "Downloading Unholy Desire Mix - Sinister Aesthetic v8..."
+    wget -q "https://civitai.com/api/download/models/2824082?token=${CIVITAI_API_TOKEN}" \
+        -O "$CKPT_PATH"
+    echo "Checkpoint download complete ($(du -h "$CKPT_PATH" | cut -f1))"
+else
+    echo "Checkpoint already present, skipping download"
+fi
+
 echo "Preparing default LoRA..."
 python3 /download_lora.py
 
