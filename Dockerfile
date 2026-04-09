@@ -14,8 +14,16 @@ RUN cd /ComfyUI/custom_nodes && \
 # Install handler dependencies
 RUN pip install runpod websocket-client Pillow
 
-# Checkpoint directory (model is downloaded at container startup)
+# Download checkpoint at build time for stable mmap loading
 RUN mkdir -p /ComfyUI/models/checkpoints
+ARG CIVITAI_API_TOKEN
+RUN if [ -n "$CIVITAI_API_TOKEN" ]; then \
+      wget -q "https://civitai.com/api/download/models/2824082?token=${CIVITAI_API_TOKEN}" \
+        -O /ComfyUI/models/checkpoints/UnholyDesireMixSinisterAesthetic_V8.safetensors && \
+      echo "Checkpoint baked in ($(du -h /ComfyUI/models/checkpoints/UnholyDesireMixSinisterAesthetic_V8.safetensors | cut -f1))"; \
+    else \
+      echo "WARNING: CIVITAI_API_TOKEN not provided, checkpoint will be downloaded at runtime"; \
+    fi
 
 # Copy files
 COPY handler.py /handler.py
